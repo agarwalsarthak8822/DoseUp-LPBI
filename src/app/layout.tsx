@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MedRush - Medicine Delivery",
+  title: "Doseupp - Medicine Delivery",
   description: "Fast medicine delivery from trusted pharmacies near you",
 };
 
