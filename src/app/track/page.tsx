@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { DoseuppLogo } from "@/components/DoseuppLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { CustomerAuthNav } from "@/components/auth/CustomerAuthNav";
 
 type OrderItem = {
   name: string;
@@ -251,7 +252,8 @@ function TrackContent() {
         <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border/50">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <Link href="/"><DoseuppLogo size="md" /></Link>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <CustomerAuthNav />
               <ThemeToggle />
               <Link href="/order"><Button className="btn-primary-gradient font-semibold">Order Now</Button></Link>
             </div>
@@ -263,7 +265,7 @@ function TrackContent() {
               <Package className="w-12 h-12 text-muted-foreground" />
             </motion.div>
             <h1 className="text-2xl font-bold text-foreground mb-2">No Active Orders</h1>
-            <p className="text-muted-foreground mb-6">You don't have any orders to track right now.</p>
+            <p className="text-muted-foreground mb-6">You don&apos;t have any orders to track right now.</p>
             <Link href="/order"><Button className="btn-primary-gradient font-bold px-8 py-6"><ShoppingCart className="w-5 h-5 mr-2" />Order Medicines</Button></Link>
           </motion.div>
         </div>
@@ -286,6 +288,7 @@ function TrackContent() {
         <div className="max-w-[1600px] mx-auto px-4 py-2 flex items-center justify-between">
           <Link href="/"><DoseuppLogo size="sm" /></Link>
           <div className="flex items-center gap-2">
+            <CustomerAuthNav />
             <ThemeToggle />
             <Link href="/order">
               <Button size="sm" className="btn-primary-gradient font-semibold text-xs px-3 h-8">Order More</Button>

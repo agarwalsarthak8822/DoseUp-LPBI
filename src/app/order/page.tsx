@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DoseuppLogo } from "@/components/DoseuppLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { CustomerAuthNav } from "@/components/auth/CustomerAuthNav";
 import { getPharmaciesWithDistances, findNearestPharmacyWithStock, type Pharmacy, subscribeToPharmacies } from "@/lib/pharmacy-store";
 import { medicines, categories, type Medicine } from "@/lib/medicines-store";
 
@@ -232,7 +233,8 @@ export default function OrderPage() {
             />
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <CustomerAuthNav />
             <ThemeToggle />
             <motion.div
               animate={cartAnimation ? { scale: [1, 1.2, 1] } : {}}

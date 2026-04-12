@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { DoseuppLogo } from "@/components/DoseuppLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { CustomerAuthNav } from "@/components/auth/CustomerAuthNav";
 import { getPharmaciesWithDistances, type Pharmacy, subscribeToPharmacies } from "@/lib/pharmacy-store";
 import { getFeaturedMedicines, type Medicine, medicines } from "@/lib/medicines-store";
 
@@ -628,7 +629,8 @@ export default function Home() {
             <Link href="/pharmacy/onboarding" className="text-muted-foreground hover:text-primary transition-colors font-medium">Partner with Us</Link>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap justify-end">
+            <CustomerAuthNav />
             <ThemeToggle />
             <Link href="/pharmacy/onboarding">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white hidden sm:flex font-medium">

@@ -20,6 +20,10 @@
 # production
 /build
 
+# env (secrets)
+.env
+.env*.local
+
 # misc
 .DS_Store
 *.pem

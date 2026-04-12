@@ -217,7 +217,9 @@ export default function PharmacyDashboard() {
     }).join(", ");
   };
 
-  const reserveInventoryForOrder = (order: Order) => {
+  const reserveInventoryForOrder = (
+    order: Order
+  ): { success: true } | { success: false; message: string } => {
     if (!pharmacy) return { success: false, message: "No pharmacy selected" };
     const latest = getPharmacyById(pharmacy.id);
     if (!latest) return { success: false, message: "Pharmacy not found" };
@@ -236,7 +238,7 @@ export default function PharmacyDashboard() {
     const updated = getPharmacyById(latest.id);
     if (updated) setPharmacy(updated);
     setLastSyncedAt(new Date());
-    return { success: true };
+    return { success: true as const };
   };
 
   const releaseInventoryForOrder = (order: Order) => {
@@ -269,7 +271,7 @@ export default function PharmacyDashboard() {
 
   const updateOrderStatus = (orderId: string, newStatus: string, riderId?: string) => {
     setInventoryAlert(null);
-    let nextRiderId = riderId;
+    let nextRiderId: string | null | undefined = riderId;
     setOrders(prev => prev.map(order => {
       if (order.id !== orderId) return order;
 
