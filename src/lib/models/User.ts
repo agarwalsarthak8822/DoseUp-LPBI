@@ -11,7 +11,10 @@ const userSchema = new Schema(
       trim: true,
       maxlength: 255,
     },
-    passwordHash: { type: String, required: true, select: false },
+    /** Set for email/password accounts; omitted for Google-only users. */
+    passwordHash: { type: String, required: false, select: false },
+    /** Google account subject (`sub` from userinfo). */
+    googleId: { type: String, sparse: true, unique: true, trim: true, maxlength: 128 },
   },
   { timestamps: true }
 );

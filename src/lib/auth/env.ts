@@ -9,3 +9,13 @@ export function jwtSecretConfigError(): string | null {
   }
   return null;
 }
+
+/** Returns a user-safe error message if Google OAuth is not configured, else null. */
+export function googleOAuthConfigError(): string | null {
+  const id = process.env.GOOGLE_CLIENT_ID?.trim();
+  const secret = process.env.GOOGLE_CLIENT_SECRET?.trim();
+  if (!id || !secret) {
+    return "Google sign-in is not configured: set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env.local.";
+  }
+  return null;
+}

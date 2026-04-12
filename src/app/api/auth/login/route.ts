@@ -40,7 +40,17 @@ export async function POST(req: Request) {
   }
 
   const user = await UserModel.findOne({ email }).select("+passwordHash");
-  const ok = user && (await verifyPassword(password, user.passwordHash));
+  if (user && (!user.passwordHash || String(user.passwordHash).length === 0)) {
+    return NextResponse.json(
+      { error: "This account uses Google sign-in. Continue with Google below." },
+      { status: 401 }
+    );
+  }
+  const ok =
+    user &&
+    typeof user.passwordHash === "string" &&
+    user.passwordHash.length > 0 &&
+    (await verifyPassword(password, user.passwordHash));
 
   if (!ok) {
     return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });

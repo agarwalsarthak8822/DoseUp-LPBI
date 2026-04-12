@@ -22,6 +22,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { DoseuppLogo } from "@/components/DoseuppLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { CustomerAuthNav } from "@/components/auth/CustomerAuthNav";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { toast } from "sonner";
 
 export default function SignupPage() {
@@ -132,6 +133,17 @@ export default function SignupPage() {
               <AlertDescription>{serverError}</AlertDescription>
             </Alert>
           )}
+
+          <GoogleSignInButton redirectTo="/account" />
+
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-border" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-card px-2 text-muted-foreground">Or sign up with email</span>
+            </div>
+          </div>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

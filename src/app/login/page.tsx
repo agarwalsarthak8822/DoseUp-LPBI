@@ -22,6 +22,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { DoseuppLogo } from "@/components/DoseuppLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { CustomerAuthNav } from "@/components/auth/CustomerAuthNav";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { toast } from "sonner";
 
 function LoginForm() {
@@ -29,6 +30,7 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const from = searchParams.get("from") || "/account";
   const prefilledEmail = searchParams.get("email")?.trim() ?? "";
+  const oauthError = searchParams.get("error");
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -40,6 +42,12 @@ function LoginForm() {
   useEffect(() => {
     form.setValue("email", prefilledEmail);
   }, [prefilledEmail, form]);
+
+  useEffect(() => {
+    if (oauthError) {
+      toast.error(oauthError);
+    }
+  }, [oauthError]);
 
   async function onSubmit(values: LoginInput) {
     setServerError(null);
@@ -84,13 +92,24 @@ function LoginForm() {
           <p className="text-muted-foreground text-sm mt-2">Use your customer account</p>
         </div>
 
-        {serverError && (
+        {(serverError || oauthError) && (
           <Alert variant="destructive" className="mb-6">
             <AlertCircle />
             <AlertTitle>Sign-in failed</AlertTitle>
-            <AlertDescription>{serverError}</AlertDescription>
+            <AlertDescription>{serverError ?? oauthError}</AlertDescription>
           </Alert>
         )}
+
+        <GoogleSignInButton redirectTo={from.startsWith("/") ? from : "/account"} />
+
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-card px-2 text-muted-foreground">Or with email</span>
+          </div>
+        </div>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
